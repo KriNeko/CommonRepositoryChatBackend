@@ -1,1 +1,4 @@
-# CommonRepositoryChatBackend
+npm i
+
+scripts:
+npm start
