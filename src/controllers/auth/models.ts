@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const { mongoConnection } = require('../mongoDB')
+const { mongoConnection } = require('../../mongoDB')
 const userDB = mongoConnection.useDb('user')
 
 const userProfileSchema = Schema({
