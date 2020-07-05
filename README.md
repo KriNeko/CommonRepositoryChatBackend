@@ -1,7 +1,7 @@
 npm i
 
 scripts:
-npm start
+npm run start
 
 host: https://js-misc-chat.herokuapp.com/
 registration: https://js-misc-chat.herokuapp.com/auth/registration
