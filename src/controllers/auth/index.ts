@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt')
 const { userProfileModel } = require('./models')
-
+const { registrationValidate } = require('./validation')
 
 module.exports = (app) => {
 
-  app.get('/auth/registration', (req, res) => {
-    const { login, password } = req.headers
+  app.post('/auth/registration', registrationValidate, (req, res) => {
+    const { login, password } = req.body
     const { genSaltSync, hashSync } = bcrypt
     const salt = genSaltSync(10)
     const hash = hashSync(password, salt)
@@ -13,12 +13,12 @@ module.exports = (app) => {
       login,
       password: hash,
     })
-    try {
-      userProfile.save()
-      res.send({ ok: true })
-    } catch (error) {
-      console.log('registration failed. Error:' + error)
-    }
+    userProfile.save(error => {
+      if (error)
+        res.send({ ok: false, error })
+      else
+        res.send({ ok: true })
+    })
   })
   
 }

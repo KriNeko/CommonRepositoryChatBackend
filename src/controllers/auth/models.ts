@@ -1,10 +1,21 @@
-const { Schema } = require('mongoose')
-const { mongoConnection } = require('../../mongoDB')
-const userDB = mongoConnection.useDb('user')
+const { Schema, model } = require('mongoose')
 
 const userProfileSchema = Schema({
-  login: String,
-  password: String,
+  password:{
+    type:String,
+    required: true,
+    trim:true,
+    max: 25,
+    min: 5,
+  },
+  login:{
+    type:String,
+    required: true,
+    trim:true,
+    unique: true,
+    max: 20,
+    min: 3,
+  }
 })
 
-export const userProfileModel = userDB.model('Profile', userProfileSchema)
+export const userProfileModel = model('user_profile', userProfileSchema)
